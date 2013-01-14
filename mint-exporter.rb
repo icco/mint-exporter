@@ -23,4 +23,22 @@ form.username = username
 form.password = password
 form.submit
 
-puts agent.get(URI.join hostname, "/transactionDownload.event").body
+#puts agent.get(URI.join hostname, "/transactionDownload.event").body
+trend_page = agent.get(URI.join hostname, "/trend.event")
+
+
+
+data = {
+  "searchQuery" => {
+    "reportType" => "AA",
+    "chartType" => "H",
+    "matchAny" => true,
+    "terms" => [],
+    "dateRange" => {
+      "start" => "12/1/2012",
+      "end" => "12/31/2012"
+    },
+  },
+}
+
+p agent.post(URI.join(hostname, "/trendData.xevent"), data)
