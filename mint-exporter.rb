@@ -31,11 +31,11 @@ form.submit
 # Get Transcations
 #transactions_csv = agent.get(URI.join hostname, "/transactionDownload.event").body
 
-
+# Get Accounts
 trend_page = agent.get(URI.join hostname, "/trend.event")
 
 form = trend_page.form_with(:action => "https://wwws.mint.com/trend.event")
-data = form['javascript-import-node'].chomp.sub('json = ', '').delete(';')
+data = form['javascript-import-node'].chomp.sub('json = ', '').chomp(';')
 json = JSON.parse data
 
 json['premiumaccountlist'].each do |account|
