@@ -36,7 +36,10 @@ trend_page = agent.get(URI.join hostname, "/trend.event")
 
 form = trend_page.form_with(:action => "https://wwws.mint.com/trend.event")
 data = form['javascript-import-node'].chomp.sub('json = ', '').delete(';')
-puts data
 json = JSON.parse data
-puts JSON.pretty_generate json
 
+json['premiumaccountlist'].each do |account|
+  if !account['isClosed']
+    puts "#{account['accountName']}: #{account['value']}"
+  end
+end
