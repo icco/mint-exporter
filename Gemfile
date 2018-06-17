@@ -1,4 +1,4 @@
 source :rubygems
 
-gem "mechanize"
-gem "json"
+gem "mechanize", ">= 2.7.4"
+gem "json", ">= 1.7.7"
